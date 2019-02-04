@@ -1,13 +1,11 @@
 using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace CSharpDesignPatterns.Creational
 {
     /// <summary>
     /// The Factory Method is a method that will create an object
-    /// of a specific type or a specific state. This is useful to
-    /// abstract functionality from creating a required object.
+    /// of a specific type or a specific state. In contrast with the
+    /// Builder, this will generate a pre-defined object.
     /// </summary>
 
 
