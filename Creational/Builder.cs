@@ -4,59 +4,92 @@ namespace CSharpDesignPatterns.Creational
 {
     /// <summary>
     /// The Builder pattern is a pattern to build objects, bit by bit,
-    /// until you have the object you require. In contrast with the
-    /// Factory, this will allow the programmer to create a tailored
-    /// object.
+    /// until you have the object you require. Similarly to the Factory,
+    /// this will produce a ready-made object; the main difference is that
+    /// the Builder will produce the object over a series of steps.
     /// 
-    /// TODO: create the builders
+    /// TODO test this
     /// </summary>
 
     class MainApp
     {
         public void Main()
         {
-            // We can build the object to specification
-            Cat myCat = new Tiger()
-                .WithClaws()
-                .WithTeeth();
+            Cake myCarrotCake;
+            CakeShop shop = new CakeShop();
 
-            myCat.Pounce();
+            CarrotCakeBuilder builder = new CarrotCakeBuilder();
+
+            myCarrotCake = shop.MakeCake(builder);
+
+            // can now eat the delicious cake :)
         }
     }
 
-    abstract class Cat
+    class CakeShop
     {
-        protected String _teeth;
-        protected String _claws;
+        public void MakeCake(CakeBuilder builder)
+        {
+            builder.WithFlour()
+                .WithSecretIngredient();
 
-        abstract Cat WithTeeth();
-        abstract Cat WithClaws();
-        abstract void Pounce();
+            return builder.Build();
+        }
     }
 
-    class Tiger : Cat
+    abstract class CakeBuilder
     {
+        protected Cake MyCake { get; private set; }
+
+        abstract CakeBuilder WithFlour();
+        abstract CakeBuilder WithSecretIngredient();
+        abstract Cake Build();
+    }
+
+    class CarrotCakeBuilder : CakeBuilder
+    {
+        public CarrotCakeBuilder()
+        {
+            MyCake = new Cake();
+        }
+
         /// <returns>
         /// We can return 'this' to create a fluent interface via 
         /// method chaining.
         /// </returns>
-        public override Cat WithTeeth()
+        public override CakeBuilder WithFlour()
         {
-            _teeth = "Sharp";
+            MyCake.AddFlour();
 
             return this;
         }
 
-        public override Cat WithClaws()
+        public override CakeBuilder WithSecretIngredient()
         {
-            _claws = "Sharp";
+            MyCake.AddFlour("carrot");
 
             return this;
         }
 
-        public override void Pounce()
+        public override Cake Build()
         {
-            //
+            return MyCake;
+        }
+    }
+
+    class Cake
+    {
+        private bool _flour;
+        private String _secretIngredient;
+
+        public void AddFlour()
+        {
+            _flour = true;
+        }
+
+        public void AddSecretIngredient(String ingredient)
+        {
+            _secretIngredient = ingredient;
         }
     }
 
