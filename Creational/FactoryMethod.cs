@@ -4,56 +4,55 @@ namespace CSharpDesignPatterns.Creational
 {
     /// <summary>
     /// The Factory Method is a method that will create an object
-    /// of a specific type or a specific state. In contrast with the
-    /// Builder, this will generate a pre-defined object.
+    /// of a specific type or a specific state.
     /// </summary>
 
-
-    abstract class Meal
+    interface Cake
     {
-        protected Boolean _burger;
-        protected Boolean _chips;
-
-        // The factory method
-        abstract Meal GetMeal();
+        void BakeTime();
     }
 
-    class LargeMeal : Meal
+    class CarrotCake : Cake
     {
-        public override Meal GetMeal()
+        public void BakeTime()
         {
-            _burger = true;
-            _chips = true;
-
-            return this;
+            Console.Write("Baking carrot cake!");
         }
     }
 
-    class SmallMeal : Meal
+    class MudCake : Cake
     {
-        public override Meal GetMeal()
+        public void BakeTime()
         {
-            _burger = true;
-            _chips = false;
-
-            return this;
+            Console.Write("Baking mudcake!");
         }
     }
 
-    class MealOrderer
+    abstract class CakeMaker
     {
-        public Meal OrderSmallMeal()
-        {
-            SmallMeal meal = new SmallMeal();
+        /// <summary>
+        /// The factory method, which we will override
+        /// to produce a new instance of a concrete Cake
+        /// </summary>
+        /// <returns>
+        /// Some type of concrete Cake
+        /// </returns>
+        public abstract Cake MakeCake();
+    }
 
-            return meal.GetMeal();
+    class CarrotCakeMaker : CakeMaker
+    {
+        public Cake MakeCake()
+        {
+            return new CarrotCake();
         }
+    }
 
-        public Meal OrderLargeMeal()
+    class MudCakeMaker : CakeMaker
+    {
+        public Cake MakeCake()
         {
-            LargeMeal meal = new LargeMeal();
-
-            return meal.GetMeal();
+            return new MudCake();
         }
     }
 }

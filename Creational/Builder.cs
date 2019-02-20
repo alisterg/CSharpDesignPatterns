@@ -37,9 +37,9 @@ namespace CSharpDesignPatterns.Creational
         }
     }
 
-    abstract class CakeBuilder
+    interface CakeBuilder
     {
-        protected Cake MyCake { get; private set; }
+        protected Cake MyCake { get; }
 
         abstract CakeBuilder WithFlour();
         abstract CakeBuilder WithSecretIngredient();
