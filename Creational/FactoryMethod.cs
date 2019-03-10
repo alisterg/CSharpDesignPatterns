@@ -5,7 +5,24 @@ namespace CSharpDesignPatterns.Creational
     /// <summary>
     /// The Factory Method is a method that will create an object
     /// of a specific type or a specific state.
+    /// 
+    /// Benefits: Decouples the instantiation from the implementer. 
+    /// Allows greater adherence to the Open/Closed principle and 
+    /// Dependency Inversion principle.
+    /// 
+    /// TODO test
     /// </summary>
+    
+    class MainApp
+    {
+        public void Main()
+        {
+            CarrotCakeMaker cakeMaker = new CarrotCakeMaker();
+            
+            Cake myCake = cakeMaker.MakeCake();
+            // can now eat the delicious Carrot cake :)
+        }
+    }
 
     interface Cake
     {
