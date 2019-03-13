@@ -17,11 +17,14 @@ namespace CSharpDesignPatterns.Creational
     
     class Main
     {
-        CarrotCakePrototype carrotCake = new CarrotCakePrototype();
-        CarrotCakePrototype newCarrotCake = carrotCake.Clone();
+        public void Run() 
+        {
+            CarrotCakePrototype carrotCake = new CarrotCakePrototype();
+            CarrotCakePrototype newCarrotCake = carrotCake.Clone();
 
-        // now we have two delicious carrot cakes, without having to
-        // initialise / perform operations on two instances.
+            // now we have two delicious carrot cakes, without having to
+            // initialise / perform operations on two instances.
+        }
     }
 
     interface Prototype
