@@ -1,6 +1,6 @@
 using System;
 
-namespace CSharpDesignPatterns.Creational
+namespace DesignPatterns.Creational.Prototype
 {
     /// <summary>
     /// The Prototype pattern basically clones objects instead of
@@ -15,12 +15,12 @@ namespace CSharpDesignPatterns.Creational
     /// TODO test
     /// </summary>
     
-    class Main
+    class MainPrototypeApp
     {
         public void Run() 
         {
             CarrotCakePrototype carrotCake = new CarrotCakePrototype();
-            CarrotCakePrototype newCarrotCake = carrotCake.Clone();
+            CarrotCakePrototype newCarrotCake = (CarrotCakePrototype)carrotCake.Clone();
 
             // now we have two delicious carrot cakes, without having to
             // initialise / perform operations on two instances.
@@ -40,7 +40,7 @@ namespace CSharpDesignPatterns.Creational
         public Prototype Clone() 
         {
             // now we have a copy of the object
-            return (CarrotCakePrototype) this.MemberwiseClone();
+            return (CarrotCakePrototype)this.MemberwiseClone();
         }
     }
 
@@ -48,7 +48,7 @@ namespace CSharpDesignPatterns.Creational
     {
         public Prototype Clone() 
         {
-            return (MudCakePrototype) this.MemberwiseClone();
+            return (MudCakePrototype)this.MemberwiseClone();
         }
     }
 }

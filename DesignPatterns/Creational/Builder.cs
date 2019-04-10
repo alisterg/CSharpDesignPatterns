@@ -1,6 +1,6 @@
 using System;
 
-namespace CSharpDesignPatterns.Creational
+namespace DesignPatterns.Creational.Builder
 {
     /// <summary>
     /// The Builder pattern is a pattern to build objects, bit by bit,
@@ -8,10 +8,10 @@ namespace CSharpDesignPatterns.Creational
     /// this will produce a ready-made object; the main difference is that
     /// the Builder will produce the object over a series of steps.
     /// 
-    /// TODO test this
+    /// TODO test
     /// </summary>
 
-    class MainApp
+    class MainBuilderApp
     {
         public void Main()
         {
@@ -28,7 +28,7 @@ namespace CSharpDesignPatterns.Creational
 
     class CakeShop
     {
-        public void MakeCake(CakeBuilder builder)
+        public Cake MakeCake(CakeBuilder builder)
         {
             builder.WithFlour()
                 .WithSecretIngredient();
@@ -39,15 +39,17 @@ namespace CSharpDesignPatterns.Creational
 
     interface CakeBuilder
     {
-        protected Cake MyCake { get; }
+        Cake MyCake { get; }
 
-        abstract CakeBuilder WithFlour();
-        abstract CakeBuilder WithSecretIngredient();
-        abstract Cake Build();
+        CakeBuilder WithFlour();
+        CakeBuilder WithSecretIngredient();
+        Cake Build();
     }
 
     class CarrotCakeBuilder : CakeBuilder
     {
+        public Cake MyCake { get; }
+
         public CarrotCakeBuilder()
         {
             MyCake = new Cake();
@@ -57,21 +59,21 @@ namespace CSharpDesignPatterns.Creational
         /// We can return 'this' to create a fluent interface via 
         /// method chaining.
         /// </returns>
-        public override CakeBuilder WithFlour()
+        public CakeBuilder WithFlour()
         {
             MyCake.AddFlour();
 
             return this;
         }
 
-        public override CakeBuilder WithSecretIngredient()
+        public CakeBuilder WithSecretIngredient()
         {
-            MyCake.AddFlour("carrot");
+            MyCake.AddSecretIngredient("carrot");
 
             return this;
         }
 
-        public override Cake Build()
+        public Cake Build()
         {
             return MyCake;
         }

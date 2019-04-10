@@ -1,6 +1,6 @@
 using System;
 
-namespace CSharpDesignPatterns.Creational
+namespace DesignPatterns.Creational.Factory
 {
     /// <summary>
     /// The Factory Method is a method that will create an object
@@ -13,7 +13,7 @@ namespace CSharpDesignPatterns.Creational
     /// TODO test
     /// </summary>
     
-    class MainApp
+    class MainFactoryApp
     {
         public void Main()
         {
@@ -59,7 +59,7 @@ namespace CSharpDesignPatterns.Creational
 
     class CarrotCakeMaker : CakeMaker
     {
-        public Cake MakeCake()
+        public override Cake MakeCake()
         {
             return new CarrotCake();
         }
@@ -67,7 +67,7 @@ namespace CSharpDesignPatterns.Creational
 
     class MudCakeMaker : CakeMaker
     {
-        public Cake MakeCake()
+        public override Cake MakeCake()
         {
             return new MudCake();
         }

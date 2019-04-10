@@ -1,6 +1,6 @@
 using System;
 
-namespace CSharpDesignPatterns.Creational
+namespace DesignPatterns.Creational.Singleton
 {
     /// <summary>
     /// The Singleton principle specifies a type of object
@@ -15,7 +15,7 @@ namespace CSharpDesignPatterns.Creational
     /// TODO test
     /// </summary>
     
-    class Main
+    class MainSingletonApp
     {
         public void Run()
         {

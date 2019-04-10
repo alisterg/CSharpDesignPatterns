@@ -1,6 +1,6 @@
 using System;
 
-namespace CSharpDesignPatterns.Creational
+namespace DesignPatterns.Creational.AbstractFactory
 {
     /// <summary>
     /// An Abstract Factory defines an interface for factory methods
@@ -11,11 +11,11 @@ namespace CSharpDesignPatterns.Creational
     /// factory methods will return different subtypes of CarrotCake and
     /// MudCake.
     ///  
-    /// TODO test, implement MudCake
+    /// TODO test
     /// 
     /// </summary>
     
-    class MainApp
+    class MainAbstractFactoryApp
     {
         public void Main(String[] args)
         {
@@ -40,33 +40,39 @@ namespace CSharpDesignPatterns.Creational
 
     interface ICakeFactory
     {
-        public abstract CarrotCake CreateCarrotCake();
-        public abstract Mudcake CreateMudcake();
+        CarrotCake CreateCarrotCake();
+        MudCake CreateMudcake();
     }
 
     class FancyCakeFactory : ICakeFactory
     {
-        public override CarrotCake CreateCarrotCake()
+        public CarrotCake CreateCarrotCake()
         {
             return new FancyCarrotCake();
         }
 
-        public override MudCake CreateMudcake() {}
+        public MudCake CreateMudcake() 
+        {
+            return new MudCake();
+        }
     }
 
     class CheapCakeFactory : ICakeFactory
     {
-        public override CarrotCake CreateCarrotCake() 
+        public CarrotCake CreateCarrotCake() 
         {
             return new CheapCarrotCake();
         }
 
-        public override MudCake CreateMudcake() {}
+        public MudCake CreateMudcake() 
+        {
+            return new MudCake();
+        }
     }
     
     class CarrotCake
     {
-        public void BakeTime() 
+        public virtual void BakeTime() 
         {
             Console.WriteLine("Baking regular carrot cake!");
         }
@@ -87,4 +93,6 @@ namespace CSharpDesignPatterns.Creational
             Console.WriteLine("Baking cheap carrot cake!");
         }
     }
+
+    class MudCake{}
 }
