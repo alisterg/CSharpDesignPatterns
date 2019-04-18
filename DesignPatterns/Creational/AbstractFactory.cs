@@ -10,18 +10,15 @@ namespace DesignPatterns.Creational.AbstractFactory
     /// type of factory (FancyCakeFactory or CheapCakeFactory), these
     /// factory methods will return different subtypes of CarrotCake and
     /// MudCake.
-    ///  
-    /// TODO test
     /// 
     /// </summary>
-    
-    class MainAbstractFactoryApp
+    public class MainAbstractFactoryApp
     {
-        public void Main(String[] args)
+        public CarrotCake Main(string[] args)
         {
             ICakeFactory cakeFactory;
 
-            switch(args[0])
+            switch (args[0])
             {
                 case "fancy":
                     cakeFactory = new FancyCakeFactory();
@@ -34,65 +31,80 @@ namespace DesignPatterns.Creational.AbstractFactory
             }
 
             CarrotCake freshCarrotCake = cakeFactory.CreateCarrotCake();
+            
+            return freshCarrotCake;
             // can now eat the delicious cheap or fancy carrot cake :)
         }
     }
 
-    interface ICakeFactory
+    /// <summary>
+    /// The abstract factory - implementers will return a
+    /// different category of objects for each factory method
+    /// </summary>
+    public interface ICakeFactory
     {
+        /// <summary>
+        /// An abstract factory method
+        /// </summary>
+        /// <returns>
+        /// Returns a carrot cake of type depending on
+        /// the implementer
+        /// </returns>
         CarrotCake CreateCarrotCake();
         MudCake CreateMudcake();
     }
 
-    class FancyCakeFactory : ICakeFactory
+    public class FancyCakeFactory : ICakeFactory
     {
         public CarrotCake CreateCarrotCake()
         {
             return new FancyCarrotCake();
         }
 
-        public MudCake CreateMudcake() 
+        public MudCake CreateMudcake()
         {
             return new MudCake();
         }
     }
 
-    class CheapCakeFactory : ICakeFactory
+    public class CheapCakeFactory : ICakeFactory
     {
-        public CarrotCake CreateCarrotCake() 
+        public CarrotCake CreateCarrotCake()
         {
             return new CheapCarrotCake();
         }
 
-        public MudCake CreateMudcake() 
+        public MudCake CreateMudcake()
         {
             return new MudCake();
         }
     }
-    
-    class CarrotCake
+
+    public class CarrotCake
     {
-        public virtual void BakeTime() 
+        public virtual string BakeTime()
         {
-            Console.WriteLine("Baking regular carrot cake!");
+            return "Baking regular carrot cake!";
         }
     }
 
-    class FancyCarrotCake : CarrotCake
+    public class FancyCarrotCake : CarrotCake
     {
-        public override void BakeTime()
+        public override string BakeTime()
         {
-            Console.WriteLine("Baking fancy carrot cake!");
+            return "Baking fancy carrot cake!";
         }
     }
 
-    class CheapCarrotCake : CarrotCake
+    public class CheapCarrotCake : CarrotCake
     {
-        public override void BakeTime() 
+        public override string BakeTime()
         {
-            Console.WriteLine("Baking cheap carrot cake!");
+            return "Baking cheap carrot cake!";
         }
     }
 
-    class MudCake{}
+    public class MudCake
+    {
+    }
 }

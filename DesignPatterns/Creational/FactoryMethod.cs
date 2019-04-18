@@ -1,6 +1,6 @@
 using System;
 
-namespace DesignPatterns.Creational.Factory
+namespace DesignPatterns.Creational.FactoryMethod
 {
     /// <summary>
     /// The Factory Method is a method that will create an object
@@ -9,43 +9,42 @@ namespace DesignPatterns.Creational.Factory
     /// Benefits: Decouples the instantiation from the implementer. 
     /// Allows greater adherence to the Open/Closed principle and 
     /// Dependency Inversion principle.
-    /// 
-    /// TODO test
     /// </summary>
-    
-    class MainFactoryApp
+    public class MainFactoryApp
     {
-        public void Main()
+        public ICake Main()
         {
             CarrotCakeMaker cakeMaker = new CarrotCakeMaker();
             
-            Cake myCake = cakeMaker.MakeCake();
+            ICake myCake = cakeMaker.MakeCake();
+
+            return myCake;
             // can now eat the delicious Carrot cake :)
         }
     }
 
-    interface Cake
+    public interface ICake
     {
-        void BakeTime();
+        string BakeTime();
     }
 
-    class CarrotCake : Cake
+    public class CarrotCake : ICake
     {
-        public void BakeTime()
+        public string BakeTime()
         {
-            Console.Write("Baking carrot cake!");
+            return "Baking carrot cake!";
         }
     }
 
-    class MudCake : Cake
+    public class MudCake : ICake
     {
-        public void BakeTime()
+        public string BakeTime()
         {
-            Console.Write("Baking mudcake!");
+            return "Baking mudcake!";
         }
     }
 
-    abstract class CakeMaker
+    public abstract class CakeMaker
     {
         /// <summary>
         /// The factory method, which we will override
@@ -54,20 +53,32 @@ namespace DesignPatterns.Creational.Factory
         /// <returns>
         /// Some type of concrete Cake
         /// </returns>
-        public abstract Cake MakeCake();
+        public abstract ICake MakeCake();
     }
 
-    class CarrotCakeMaker : CakeMaker
+    public class CarrotCakeMaker : CakeMaker
     {
-        public override Cake MakeCake()
+        /// <summary>
+        /// A concrete factory method
+        /// </summary>
+        /// <returns>
+        /// An instance of CarrotCake
+        /// </returns>
+        public override ICake MakeCake()
         {
             return new CarrotCake();
         }
     }
 
-    class MudCakeMaker : CakeMaker
+    public class MudCakeMaker : CakeMaker
     {
-        public override Cake MakeCake()
+        /// <summary>
+        /// Another concrete factory method
+        /// </summary>
+        /// <returns>
+        /// An instance of MudCake
+        /// </returns>
+        public override ICake MakeCake()
         {
             return new MudCake();
         }
