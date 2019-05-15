@@ -11,47 +11,38 @@ namespace DesignPatterns.Creational.Singleton
     /// 
     /// A common use is a database connection (so the connection can
     /// be shared / transactions used across classes).
-    /// 
-    /// TODO test
     /// </summary>
     
-    class MainSingletonApp
+    public class MainSingletonApp
     {
-        public void Run()
+        public bool AreInstancesTheSame()
         {
             CakeFactorySingleton cakeFactory1 = CakeFactorySingleton.GetInstance();
             CakeFactorySingleton cakeFactory2 = CakeFactorySingleton.GetInstance();
 
-            // They are referring to the same object!
-            if (cakeFactory1 == cakeFactory2) 
-            {
-                Console.WriteLine("They are referring to the same object!");
-            }
+            return cakeFactory1 == cakeFactory2;
         }
     }
 
     /// <summary>
     /// The Singleton class
     /// </summary>
-    sealed class CakeFactorySingleton
+    public sealed class CakeFactorySingleton
     {
         private static CakeFactorySingleton _instance;
 
+        private string _secretIngredient;
+
         // private constructor, we do not want to instantiate this
         // externally
-        private CakeFactorySingleton() 
+        private CakeFactorySingleton()
         {
-            // do some initialisation
+            _secretIngredient = "mud";
         }
 
-        public static CakeFactorySingleton GetInstance() 
+        public static CakeFactorySingleton GetInstance()
         {
-            if(_instance == null) 
-            {
-                _instance = new CakeFactorySingleton();
-            }
-
-            return _instance;
+            return _instance ?? (_instance = new CakeFactorySingleton());
         }
     }
 }

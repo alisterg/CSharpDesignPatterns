@@ -6,7 +6,7 @@ namespace DesignPatterns.Tests.Creational
     public class PrototypeTest
     {
         [Fact]
-        public void PrototypeWorks()
+        public void TestPrototypeWorks()
         {
             MainPrototypeApp prototypeApp = new MainPrototypeApp();
 
