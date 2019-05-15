@@ -11,42 +11,49 @@ namespace DesignPatterns.Creational.Prototype
     /// of a prototype which inherited from the Object prototype. Even
     /// classes in ES6 are just syntactic sugar upon functionality which
     /// creates a new prototype.
-    /// 
-    /// TODO test
     /// </summary>
     
-    class MainPrototypeApp
+    public class MainPrototypeApp
     {
-        public void Run() 
+        public CarrotCakePrototype GetPrototype1()
         {
             CarrotCakePrototype carrotCake = new CarrotCakePrototype();
-            CarrotCakePrototype newCarrotCake = (CarrotCakePrototype)carrotCake.Clone();
+            carrotCake.SecretIngredient = "carrot";
+            return carrotCake;
+        }
 
+        public CarrotCakePrototype GetPrototype2(CarrotCakePrototype prototype1)
+        {
+            CarrotCakePrototype newCarrotCake = (CarrotCakePrototype)prototype1.Clone();
+            return newCarrotCake;
+            
             // now we have two delicious carrot cakes, without having to
             // initialise / perform operations on two instances.
         }
     }
 
-    interface Prototype
+    public interface IPrototype
     {
         // we could make this abstract class and define other members
         // in the prototype 
 
-        Prototype Clone();
+        IPrototype Clone();
     }
 
-    class CarrotCakePrototype : Prototype
+    public class CarrotCakePrototype : IPrototype
     {
-        public Prototype Clone() 
+        public string SecretIngredient { get; set; }
+        
+        public IPrototype Clone() 
         {
             // now we have a copy of the object
             return (CarrotCakePrototype)this.MemberwiseClone();
         }
     }
 
-    class MudCakePrototype : Prototype
+    public class MudCakePrototype : IPrototype
     {
-        public Prototype Clone() 
+        public IPrototype Clone() 
         {
             return (MudCakePrototype)this.MemberwiseClone();
         }

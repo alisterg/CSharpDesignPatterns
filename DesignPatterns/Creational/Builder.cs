@@ -7,28 +7,28 @@ namespace DesignPatterns.Creational.Builder
     /// until you have the object you require. Similarly to the Factory,
     /// this will produce a ready-made object; the main difference is that
     /// the Builder will produce the object over a series of steps.
-    /// 
-    /// TODO test
     /// </summary>
 
-    class MainBuilderApp
+    public class MainBuilderApp
     {
-        public void Main()
+        public Cake Main()
         {
-            Cake myCarrotCake;
+            // Our 'director' - will direct the builder object how to build
             CakeShop shop = new CakeShop();
-
+            // Our 'builder' - will follow the instructions of the 'director'
             CarrotCakeBuilder builder = new CarrotCakeBuilder();
+            
+            Cake myCarrotCake = shop.MakeCake(builder);
 
-            myCarrotCake = shop.MakeCake(builder);
-
+            // Our cake has been built to the specification from the builder
+            return myCarrotCake;
             // can now eat the delicious cake :)
         }
     }
 
-    class CakeShop
+    public class CakeShop
     {
-        public Cake MakeCake(CakeBuilder builder)
+        public Cake MakeCake(ICakeBuilder builder)
         {
             builder.WithFlour()
                 .WithSecretIngredient();
@@ -37,16 +37,16 @@ namespace DesignPatterns.Creational.Builder
         }
     }
 
-    interface CakeBuilder
+    public interface ICakeBuilder
     {
         Cake MyCake { get; }
 
-        CakeBuilder WithFlour();
-        CakeBuilder WithSecretIngredient();
+        ICakeBuilder WithFlour();
+        ICakeBuilder WithSecretIngredient();
         Cake Build();
     }
 
-    class CarrotCakeBuilder : CakeBuilder
+    public class CarrotCakeBuilder : ICakeBuilder
     {
         public Cake MyCake { get; }
 
@@ -59,14 +59,14 @@ namespace DesignPatterns.Creational.Builder
         /// We can return 'this' to create a fluent interface via 
         /// method chaining.
         /// </returns>
-        public CakeBuilder WithFlour()
+        public ICakeBuilder WithFlour()
         {
             MyCake.AddFlour();
 
             return this;
         }
 
-        public CakeBuilder WithSecretIngredient()
+        public ICakeBuilder WithSecretIngredient()
         {
             MyCake.AddSecretIngredient("carrot");
 
@@ -79,17 +79,19 @@ namespace DesignPatterns.Creational.Builder
         }
     }
 
-    class Cake
+    public class Cake
     {
         private bool _flour;
-        private String _secretIngredient;
+        private string _secretIngredient;
+        
+        public string SecretIngredient => _secretIngredient;
 
         public void AddFlour()
         {
             _flour = true;
         }
 
-        public void AddSecretIngredient(String ingredient)
+        public void AddSecretIngredient(string ingredient)
         {
             _secretIngredient = ingredient;
         }
