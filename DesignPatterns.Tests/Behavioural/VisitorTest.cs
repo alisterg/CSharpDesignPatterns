@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Xunit;
 using DesignPatterns.Behavioural.Visitor;
 
-namespace DesignPatterns.Tests.Creational
+namespace DesignPatterns.Tests.Behavioural
 {
     public class VisitorTest
     {
